@@ -1,8 +1,8 @@
-const {Router} = require("express");
+import {Router} from "express";
 const {GiftRecord} = require("../records/gift.record");
 const {ValidationError} = require("../utils/errors");
 
-const giftRouter = Router();
+export const giftRouter = Router();
 
 giftRouter
 
@@ -25,7 +25,3 @@ giftRouter
 
         res.redirect('/gift');
     });
-
-module.exports = {
-    giftRouter,
-};

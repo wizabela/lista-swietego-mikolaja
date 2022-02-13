@@ -1,13 +1,14 @@
-const {Router} = require("express");
+import {Router} from "express";
+
 const {ChildRecord} = require("../records/child.record");
 const {GiftRecord} = require("../records/gift.record");
 const {ValidationError} = require("../utils/errors");
 
-const childRouter = Router();
+export const childRouter = Router();
 
 childRouter // /child
 
-    .get('/', async (req, res) => {
+    .get('/', async (req, res): Promise<void> => {
         const childrenList = await ChildRecord.listAll();
         const giftsList = await GiftRecord.listAll();
 
@@ -17,7 +18,7 @@ childRouter // /child
         });
     })
 
-    .post('/', async (req, res) => {
+    .post('/', async (req, res): Promise<void> => {
         const newChild = new ChildRecord(req.body);
         await newChild.insert();
 
@@ -44,7 +45,3 @@ childRouter // /child
 
         res.redirect('/child');
     });
-
-module.exports = {
-    childRouter,
-};
