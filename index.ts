@@ -1,14 +1,13 @@
 import * as express from "express";
-require('express-async-errors');
-import methodOverride from "method-override";
+import 'express-async-errors';
+import * as methodOverride from "method-override";
 import {engine} from "express-handlebars";
 import {handleError} from "./utils/errors";
 import {homeRouter} from "./routers/home";
 import {childRouter} from "./routers/child";
 import {giftRouter} from "./routers/gift";
 
-require('./utils/db');
-
+import './utils/db';
 
 const {handlebarsHelpers} = require("./utils/handlebars-helpers");
 
