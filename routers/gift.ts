@@ -1,12 +1,11 @@
 import {Router} from "express";
 const {GiftRecord} = require("../records/gift.record");
-const {ValidationError} = require("../utils/errors");
 
 export const giftRouter = Router();
 
 giftRouter
 
-    .get('/', async (req, res) => {
+    .get('/', async (req, res) : Promise<void> => {
         const giftsList = await GiftRecord.listAll();
 
         res.render('gift/list', {
@@ -14,7 +13,7 @@ giftRouter
         });
     })
 
-    .post('/', async (req, res) => {
+    .post('/', async (req, res) : Promise<void> => {
         const data = {
             ...req.body,
             count: Number(req.body.count),

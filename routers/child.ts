@@ -1,8 +1,9 @@
 import {Router} from "express";
 
-const {ChildRecord} = require("../records/child.record");
-const {GiftRecord} = require("../records/gift.record");
-const {ValidationError} = require("../utils/errors");
+import {ChildRecord} from "../records/child.record";
+import {GiftRecord} from "../records/gift.record";
+import {ValidationError} from "../utils/errors";
+
 
 export const childRouter = Router();
 
@@ -25,7 +26,7 @@ childRouter // /child
         res.redirect('/child');
     })
 
-    .patch('/gift/:childId', async (req, res) => {
+    .patch('/gift/:childId', async (req, res) : Promise<void> => {
         const child = await ChildRecord.getOne(req.params.childId);
 
         if (child === null) {
