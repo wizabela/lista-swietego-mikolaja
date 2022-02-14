@@ -9,7 +9,7 @@ export const childRouter = Router();
 
 childRouter // /child
 
-    .get('/', async (req, res): Promise<void> => {
+    .get('/', async (req, res) => {
         const childrenList = await ChildRecord.listAll();
         const giftsList = await GiftRecord.listAll();
 
@@ -19,14 +19,14 @@ childRouter // /child
         });
     })
 
-    .post('/', async (req, res): Promise<void> => {
+    .post('/', async (req, res) => {
         const newChild = new ChildRecord(req.body);
         await newChild.insert();
 
         res.redirect('/child');
     })
 
-    .patch('/gift/:childId', async (req, res) : Promise<void> => {
+    .patch('/gift/:childId', async (req, res)  => {
         const child = await ChildRecord.getOne(req.params.childId);
 
         if (child === null) {

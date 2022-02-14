@@ -5,7 +5,7 @@ export const giftRouter = Router();
 
 giftRouter
 
-    .get('/', async (req, res) : Promise<void> => {
+    .get('/', async (req, res) => {
         const giftsList = await GiftRecord.listAll();
 
         res.render('gift/list', {
@@ -13,7 +13,7 @@ giftRouter
         });
     })
 
-    .post('/', async (req, res) : Promise<void> => {
+    .post('/', async (req, res) => {
         const data = {
             ...req.body,
             count: Number(req.body.count),
