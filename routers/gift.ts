@@ -1,5 +1,6 @@
 import {Router} from "express";
 import { ValidationError } from "../utils/errors";
+import {GiftEntity} from "../types";
 
 const {GiftRecord} = require("../records/gift.record");
 
@@ -33,13 +34,9 @@ giftRouter
     })
 
     .post('/', async (req, res) => {
-        const data = {
-            ...req.body,
-            count: Number(req.body.count),
-        };
 
-        const newGift = new GiftRecord(data);
+        const newGift = new GiftRecord(req.body as GiftEntity);
         await newGift.insert();
 
-        res.redirect('/gift');
+        res.json(newGift);
     });
