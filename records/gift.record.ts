@@ -2,11 +2,12 @@ import {pool} from "../utils/db";
 import {ValidationError} from "../utils/errors";
 import {v4 as uuid} from "uuid";
 import {FieldPacket} from "mysql2";
+import {GiftEntity} from "../types";
 
 type GiftRecordResults = [GiftRecord[], FieldPacket[]];
 
 
-export class GiftRecord {
+export class GiftRecord implements GiftEntity {
     id?: string;
     name: string;
     count: number;
