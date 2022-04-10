@@ -1,5 +1,4 @@
 import {Router} from "express";
-
 import {ChildRecord} from "../records/child.record";
 import {GiftRecord} from "../records/gift.record";
 import {ValidationError} from "../utils/errors";
@@ -27,7 +26,8 @@ childRouter // /child
     })
 
     .patch('/gift/:childId', async (req, res)  => {
-        const child = await ChildRecord.getOne(req.params.childId);
+        const {childId} = req.params;
+        const child = await ChildRecord.getOne(childId);
 
         if (child === null) {
             throw new ValidationError('Nie znaleziono dziecka z podanym ID.');

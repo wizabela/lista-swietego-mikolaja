@@ -1,6 +1,6 @@
 import {Router} from "express";
-import { ValidationError } from "../utils/errors";
-import {GiftEntity} from "../types";
+import {ValidationError} from "../utils/errors";
+import {CreateGiftReq, GetSingleGiftRes} from "../types";
 
 const {GiftRecord} = require("../records/gift.record");
 
@@ -14,6 +14,16 @@ giftRouter
         res.json({
             giftsList,
         });
+    })
+
+    .get('/:giftId', async (req, res) => {
+        const gift = await GiftRecord.getOne(req.params.giftId);
+        const givenCount = await gift.countGivenGifts();
+
+        res.json({
+            gift,
+            givenCount,
+        } as GetSingleGiftRes);
     })
 
     .delete('/:id', async (req, res) => {
@@ -34,8 +44,7 @@ giftRouter
     })
 
     .post('/', async (req, res) => {
-
-        const newGift = new GiftRecord(req.body as GiftEntity);
+        const newGift = new GiftRecord(req.body as CreateGiftReq);
         await newGift.insert();
 
         res.json(newGift);
