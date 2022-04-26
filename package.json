@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node index.ts",
     "start:dev": "tsnd index.ts",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
